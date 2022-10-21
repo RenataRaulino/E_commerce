@@ -27,11 +27,13 @@ public class CategoriaService {
 	}
 	
 	public Categoria updateCategoria(Categoria categoria,Integer id) {
-
 		Categoria categoriaExistenteNoBanco = getCategoriaById(id);
+		
+		if(categoriaExistenteNoBanco!= null) {
+		categoriaExistenteNoBanco.setIdCategoria(categoriaExistenteNoBanco.getIdCategoria());
 		categoriaExistenteNoBanco.setNome(categoria.getNome());
 		categoriaExistenteNoBanco.setDescricao(categoria.getDescricao());
-		
+		}
 		return categoriaRepository.save(categoriaExistenteNoBanco);
 		
 	}

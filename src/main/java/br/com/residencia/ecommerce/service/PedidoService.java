@@ -30,13 +30,16 @@ public class PedidoService {
 	public Pedido updatePedido(Pedido pedido, Integer id) {
 		Pedido pedidoExistenteNoBanco = getPedidoById(id);
 
+		
+		if(pedidoExistenteNoBanco!= null) {
+		pedidoExistenteNoBanco.setIdPedido(pedidoExistenteNoBanco.getIdPedido());
 		pedidoExistenteNoBanco.setDataPedido(pedido.getDataPedido());
 		pedidoExistenteNoBanco.setDataEntrega(pedido.getDataEntrega());
 		pedidoExistenteNoBanco.setDataEnvio(pedido.getDataEnvio());
 		pedidoExistenteNoBanco.setStatus(pedido.getStatus());
 		pedidoExistenteNoBanco.setValorTotal(pedido.getValorTotal());
 		pedidoExistenteNoBanco.setCliente(pedido.getCliente());
-		
+		}
 		return pedidoRepository.save(pedidoExistenteNoBanco);	
 		
 	}

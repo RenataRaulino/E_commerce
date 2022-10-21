@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import br.com.residencia.ecommerce.entity.Endereco;
+import br.com.residencia.ecommerce.entity.Pedido;
 import br.com.residencia.ecommerce.repository.EnderecoRepository;
 
 
@@ -28,8 +29,10 @@ public class EnderecoService {
 	}
 	
 	public Endereco updateEndereco(Endereco endereco,Integer id) {
-
 		Endereco enderecoExistenteNoBanco = getEnderecoById(id);
+		 
+		if(  enderecoExistenteNoBanco!= null) {
+		enderecoExistenteNoBanco.setIdEndereco(enderecoExistenteNoBanco.getIdEndereco());
 		enderecoExistenteNoBanco.setCep(endereco.getCep());
 		enderecoExistenteNoBanco.setRua(endereco.getRua());
 		enderecoExistenteNoBanco.setBairro(endereco.getBairro());
@@ -37,7 +40,7 @@ public class EnderecoService {
 		enderecoExistenteNoBanco.setNumero(endereco.getNumero());
 		enderecoExistenteNoBanco.setComplemento(endereco.getComplemento());
 		enderecoExistenteNoBanco.setUf(endereco.getUf());
-		
+		}
 		return enderecoRepository.save(enderecoExistenteNoBanco);
 		
 	}

@@ -1,4 +1,4 @@
-package br.com.residencia.ecommerce.controller;
+/*package br.com.residencia.ecommerce.controller;
 
 import java.util.List;
 
@@ -48,7 +48,7 @@ public class UserController {
         String email = (String) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         // Devolvendo os dados do usuario a partir do e-mail informado
         return userService.findByEmail(email);
-    }*/
+    }
 	
 	@PostMapping
 	public ResponseEntity<User> saveUser(@RequestBody User user) {
@@ -71,4 +71,4 @@ public class UserController {
 		else 
 			return new ResponseEntity<>(false, HttpStatus.OK);
 	}
-}
+}*/

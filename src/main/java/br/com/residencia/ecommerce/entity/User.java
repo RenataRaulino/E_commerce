@@ -1,4 +1,4 @@
-package br.com.residencia.ecommerce.entity;
+/*package br.com.residencia.ecommerce.entity;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -57,4 +57,4 @@ public class User {
 	public void setUserPassword(String userPassword) {
 		this.userPassword = userPassword;
 	}
-}
+}*/

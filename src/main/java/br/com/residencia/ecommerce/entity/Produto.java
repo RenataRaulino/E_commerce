@@ -2,7 +2,7 @@ package br.com.residencia.ecommerce.entity;
 
 import java.math.BigDecimal;
 import java.time.Instant;
-import java.util.Set;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -14,8 +14,10 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 
+//@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "idProduto")
 @Entity
 @Table(name="produto")
 public class Produto {
@@ -47,19 +49,23 @@ public class Produto {
 	@JoinColumn(name = "idcategoria", referencedColumnName = "idcategoria")
 	private Categoria categoria;
 
-	@OneToMany(mappedBy="produto")
-	private Set <ItemPedido> itensPedido;
+	@JsonIgnore
+	@OneToMany(mappedBy = "produto")
+	private List<ItemPedido> itempedido;
+	
+	
 
-	public Set<ItemPedido> getItensPedido() {
-		return itensPedido;
-	}
-
-	public void setItensPedido(Set<ItemPedido> itensPedido) {
-		this.itensPedido = itensPedido;
-	}
-
+	
 	public Integer getIdProduto() {
 		return idProduto;
+	}
+
+	public List<ItemPedido> getItempedido() {
+		return itempedido;
+	}
+
+	public void setItempedido(List<ItemPedido> itempedido) {
+		this.itempedido = itempedido;
 	}
 
 	public void setIdProduto(Integer idProduto) {

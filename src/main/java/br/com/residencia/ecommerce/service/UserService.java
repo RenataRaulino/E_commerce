@@ -1,4 +1,4 @@
-package br.com.residencia.ecommerce.service;
+/*package br.com.residencia.ecommerce.service;
 
 import java.util.List;
 
@@ -52,4 +52,4 @@ public class UserService {
 			return false;
 		}
 	}
-}
+}*/

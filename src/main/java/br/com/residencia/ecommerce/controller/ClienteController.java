@@ -21,11 +21,11 @@ import br.com.residencia.ecommerce.service.ClienteService;
 @RequestMapping("/clientes")
 public class ClienteController {
 	@Autowired
-	ClienteService categoriaService;
+	ClienteService clienteService;
 	
 	@GetMapping
 	public ResponseEntity<List<Cliente>> getAllClientes(){
-		return new ResponseEntity<>(categoriaService.getAllClientes(),
+		return new ResponseEntity<>(clienteService.getAllClientes(),
 				HttpStatus.OK);
 	}
 	
@@ -33,25 +33,25 @@ public class ClienteController {
 
 	@GetMapping("/{id}")
 	public ResponseEntity<Cliente> getClienteById(@PathVariable Integer id) {
-		Cliente categoria = categoriaService.getClienteById(id);
-		if(null != categoria)
-			return new ResponseEntity<>(categoria,
+		Cliente cliente = clienteService.getClienteById(id);
+		if(null != cliente)
+			return new ResponseEntity<>(cliente,
 					HttpStatus.OK);
 		else
-			return new ResponseEntity<>(categoria,
+			return new ResponseEntity<>(cliente,
 					HttpStatus.NOT_FOUND);
 	}
 	
 	@PostMapping
-	public ResponseEntity<Cliente> saveCliente(@RequestBody Cliente categoria) {
-		return new ResponseEntity<>(categoriaService.saveCliente(categoria),
+	public ResponseEntity<Cliente> saveCliente(@RequestBody Cliente cliente) {
+		return new ResponseEntity<>(clienteService.saveCliente(cliente),
 				HttpStatus.CREATED);
 	}
 	
 	@PutMapping("/{id}")
-	public ResponseEntity<Cliente> updateCliente(@RequestBody Cliente categoria, 
+	public ResponseEntity<Cliente> updateCliente(@RequestBody Cliente cliente, 
 			@PathVariable Integer id){
-		return new ResponseEntity<>(categoriaService.updateCliente(categoria, id),
+		return new ResponseEntity<>(clienteService.updateCliente(cliente, id),
 				HttpStatus.OK);
 	}
 	
@@ -60,12 +60,12 @@ public class ClienteController {
 	
 	@DeleteMapping("/{id}")
 	public ResponseEntity<Cliente> deleteCliente(@PathVariable Integer id) {
-		Cliente categoria = categoriaService.getClienteById(id);
-		if(null == categoria)
-			return new ResponseEntity<>(categoria,
+		Cliente cliente = clienteService.getClienteById(id);
+		if(null == cliente)
+			return new ResponseEntity<>(cliente,
 					HttpStatus.NOT_FOUND);
 		else
-			return new ResponseEntity<>(categoriaService.deleteCliente(id),
+			return new ResponseEntity<>(clienteService.deleteCliente(id),
 					HttpStatus.OK);
 	}
 

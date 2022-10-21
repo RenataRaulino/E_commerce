@@ -29,15 +29,17 @@ public class ClienteService {
 	}
 	
 	public Cliente updateCliente(Cliente cliente,Integer id) {
-
 		Cliente clienteExistenteNoBanco = getClienteById(id);
+		
+		if(clienteExistenteNoBanco!= null) {
+		clienteExistenteNoBanco.setIdCliente(clienteExistenteNoBanco.getIdCliente());
 		clienteExistenteNoBanco.setEmail(cliente.getEmail());
 		clienteExistenteNoBanco.setNomeCompleto(cliente.getNomeCompleto());
 		clienteExistenteNoBanco.setCpf(cliente.getCpf());
 		clienteExistenteNoBanco.setTelefone(cliente.getTelefone());
 		clienteExistenteNoBanco.setDataNascimento(cliente.getDataNascimento());
 		clienteExistenteNoBanco.setEndereco(cliente.getEndereco());
-		
+		}
 		return clienteRepository.save(clienteExistenteNoBanco);
 		
 	}

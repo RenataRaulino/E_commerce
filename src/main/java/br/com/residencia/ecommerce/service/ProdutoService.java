@@ -30,7 +30,10 @@ public class ProdutoService {
 	
 	public Produto updateProduto(Produto produto, Integer id) {
 		Produto produtoExistenteNoBanco = getProdutoById(id);
-
+	
+		
+		if(produtoExistenteNoBanco!= null) {
+		produtoExistenteNoBanco.setIdProduto(produtoExistenteNoBanco.getIdProduto());
 		produtoExistenteNoBanco.setNome(produto.getNome());
 		produtoExistenteNoBanco.setDescricao(produto.getDescricao());
 		produtoExistenteNoBanco.setQtdEstoque(produto.getQtdEstoque());
@@ -39,9 +42,9 @@ public class ProdutoService {
 		produtoExistenteNoBanco.setImagem(produto.getImagem());
 		produtoExistenteNoBanco.setCategoria(produto.getCategoria());
 		
+	
+		}
 		return produtoRepository.save(produtoExistenteNoBanco);
-		
-		
 	}
 	
 	

@@ -1,4 +1,4 @@
-package br.com.residencia.ecommerce.service;
+/*package br.com.residencia.ecommerce.service;
 
 import java.util.Properties;
 
@@ -50,11 +50,11 @@ public class EmailService {
 		
 	}
 	public void sendEmail(String destinatario,String assunto, String mensagem) {
-	//public void sendHtmlEmail(String toEmail,String subject, String message) throws Exception{
-		//this.emailSender = javaMailSender();
+	public void sendHtmlEmail(String toEmail,String subject, String message) throws Exception{
+		this.emailSender = javaMailSender();
 		var mailMessage = new SimpleMailMessage();
 		
-		/*try {
+		try {
 			helper.setFrom(mailFrom);
 			helper.setTo(toEmail);
 			helper.setSubject(subject);
@@ -87,11 +87,11 @@ public class EmailService {
 		mailMessage.setTo(destinatario);
 		mailMessage.setSubject(assunto);
 		mailMessage.setText(mensagem);
-		mailMessage.setFrom(mailFrom);*/
+		mailMessage.setFrom(mailFrom);
 		try {
 		emailSender.send(mailMessage);
 		}catch(Exception e) {
 			System.out.println("Ocorreu um erro e não foi possível enviar o email."+ e);
 		}
 	}
-}
+}*/
