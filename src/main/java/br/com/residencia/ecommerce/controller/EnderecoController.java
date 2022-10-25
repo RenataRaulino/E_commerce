@@ -24,11 +24,14 @@ import br.com.residencia.ecommerce.service.EnderecoService;
 public class EnderecoController {
 	@Autowired
 	EnderecoService enderecoService;
-
+	
 	@GetMapping
-	public ResponseEntity<List<Endereco>> getAllEnderecos() {
-		return new ResponseEntity<>(enderecoService.getAllEnderecos(), HttpStatus.OK);
+	public ResponseEntity<List<Endereco>> getAllEnderecos(){
+		return new ResponseEntity<>(enderecoService.getAllEnderecos(),
+				HttpStatus.OK);
 	}
+	
+
 
 	@GetMapping("/{id}")
 	public ResponseEntity<Endereco> getEnderecoById(@PathVariable Integer id) {
@@ -42,45 +45,45 @@ public class EnderecoController {
 		}
 	}
 
-	/*
-	 * @GetMapping("/{id}") public ResponseEntity<Endereco>
-	 * getEnderecoById(@PathVariable Integer id) { Endereco endereco =
-	 * enderecoService.getEnderecoById(id); if(null != endereco) return new
-	 * ResponseEntity<>(endereco, HttpStatus.OK); else return new
-	 * ResponseEntity<>(endereco, HttpStatus.NOT_FOUND); }
-	 */
+		@GetMapping("/consulta-cep/{cep}")
+		public ResponseEntity<ConsultaCepDTO> consultaCepApiExterna(@PathVariable String cep) {
+			ConsultaCepDTO consultaCepDTO = enderecoService.consultaCepApiExterna(cep);
+			if (null != consultaCepDTO)
+				return new ResponseEntity<>(consultaCepDTO, HttpStatus.OK);
+			else
+				return new ResponseEntity<>(consultaCepDTO, HttpStatus.NOT_FOUND);
+		}
 
-	@GetMapping("/consulta-cep/{cep}")
-	public ResponseEntity<ConsultaCepDTO> consultaCepApiExterna(@PathVariable String cep) {
-		ConsultaCepDTO consultaCepDTO = enderecoService.consultaCepApiExterna(cep);
-		if (null != consultaCepDTO)
-			return new ResponseEntity<>(consultaCepDTO, HttpStatus.OK);
-		else
-			return new ResponseEntity<>(consultaCepDTO, HttpStatus.NOT_FOUND);
-	}
-
-	@GetMapping("/cep/{cep}")
-	public ResponseEntity<Endereco> saveEnderecoFromApi(@PathVariable String cep) {
-		return new ResponseEntity<>(enderecoService.saveEnderecoFromApi(cep), HttpStatus.CREATED);
-	}
-
+		@GetMapping("/cep/{cep}")
+		public ResponseEntity<Endereco> saveEnderecoFromApi(@PathVariable String cep) {
+			return new ResponseEntity<>(enderecoService.saveEnderecoFromApi(cep), HttpStatus.CREATED);
+		}
+	
 	@PostMapping
 	public ResponseEntity<Endereco> saveEndereco(@RequestBody Endereco endereco) {
-		return new ResponseEntity<>(enderecoService.saveEndereco(endereco), HttpStatus.CREATED);
+		return new ResponseEntity<>(enderecoService.saveEndereco(endereco),
+				HttpStatus.CREATED);
 	}
-
+	
 	@PutMapping("/{id}")
-	public ResponseEntity<Endereco> updateEndereco(@RequestBody Endereco endereco, @PathVariable Integer id) {
-		return new ResponseEntity<>(enderecoService.updateEndereco(endereco, id), HttpStatus.OK);
+	public ResponseEntity<Endereco> updateEndereco(@RequestBody Endereco endereco, 
+			@PathVariable Integer id){
+		return new ResponseEntity<>(enderecoService.updateEndereco(endereco, id),
+				HttpStatus.OK);
 	}
-
+	
+	
+	
+	
 	@DeleteMapping("/{id}")
 	public ResponseEntity<Endereco> deleteEndereco(@PathVariable Integer id) {
 		Endereco endereco = enderecoService.getEnderecoById(id);
-		if (null == endereco)
-			return new ResponseEntity<>(endereco, HttpStatus.NOT_FOUND);
+		if(null == endereco)
+			return new ResponseEntity<>(endereco,
+					HttpStatus.NOT_FOUND);
 		else
-			return new ResponseEntity<>(enderecoService.deleteEndereco(id), HttpStatus.OK);
+			return new ResponseEntity<>(enderecoService.deleteEndereco(id),
+					HttpStatus.OK);
 	}
 
 }

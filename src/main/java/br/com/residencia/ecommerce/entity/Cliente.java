@@ -1,7 +1,7 @@
 package br.com.residencia.ecommerce.entity;
 
 import java.time.Instant;
-import java.util.List;
+import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -42,7 +42,7 @@ public class Cliente {
 	private Instant dataNascimento;
 	
 	@OneToMany(mappedBy = "cliente")
-	private List <Pedido> pedidos;
+	private Set <Pedido> pedidos;
 	
 	@OneToOne
 	@JoinColumn(name = "idendereco", referencedColumnName = "idendereco")
@@ -50,11 +50,11 @@ public class Cliente {
 
 	
 
-	public List<Pedido> getPedidos() {
+	public Set<Pedido> getPedidos() {
 		return pedidos;
 	}
 
-	public void setPedidos(List<Pedido> pedidos) {
+	public void setPedidos(Set<Pedido> pedidos) {
 		this.pedidos = pedidos;
 	}
 

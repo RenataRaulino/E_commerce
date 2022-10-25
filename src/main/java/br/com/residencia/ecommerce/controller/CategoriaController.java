@@ -32,6 +32,8 @@ public class CategoriaController {
 				HttpStatus.OK);
 	}
 	
+
+
 	@GetMapping("/{id}")
 	public ResponseEntity<Categoria> getCategoriaById(@PathVariable Integer id) {
 		Categoria categoria = new Categoria();
@@ -44,18 +46,6 @@ public class CategoriaController {
 		}
 	}
 	
-	/*
-	@GetMapping("/{id}")
-	public ResponseEntity<Categoria> getCategoriaById(@PathVariable Integer id) {
-		Categoria categoria = categoriaService.getCategoriaById(id);
-		if(null != categoria)
-			return new ResponseEntity<>(categoria,
-					HttpStatus.OK);
-		else
-			return new ResponseEntity<>(categoria,
-					HttpStatus.NOT_FOUND);
-	}
-	*/
 	@PostMapping
 	public ResponseEntity<Categoria> saveCategoria(@RequestBody Categoria categoria) {
 		return new ResponseEntity<>(categoriaService.saveCategoria(categoria),

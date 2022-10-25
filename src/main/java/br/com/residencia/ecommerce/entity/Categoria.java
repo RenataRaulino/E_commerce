@@ -1,7 +1,6 @@
 package br.com.residencia.ecommerce.entity;
 
-import java.util.List;
-
+import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -32,15 +31,15 @@ public class Categoria {
 	private String descricao;
 
 	@OneToMany(mappedBy = "categoria")
-	private List <Produto> produtos;
+	private Set <Produto> produtos;
 	
 	
 
-	public List<Produto> getProdutos() {
+	public Set<Produto> getProdutos() {
 		return produtos;
 	}
 
-	public void setProdutos(List<Produto> produtos) {
+	public void setProdutos(Set<Produto> produtos) {
 		this.produtos = produtos;
 	}
 

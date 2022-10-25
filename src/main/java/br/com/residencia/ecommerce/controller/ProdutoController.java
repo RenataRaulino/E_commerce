@@ -2,9 +2,9 @@ package br.com.residencia.ecommerce.controller;
 
 import java.io.IOException;
 import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -17,7 +17,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RequestPart;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
-
 import br.com.residencia.ecommerce.dto.ProdutoDTO;
 import br.com.residencia.ecommerce.entity.Produto;
 import br.com.residencia.ecommerce.exception.NoSuchElementFoundException;
@@ -40,21 +39,7 @@ public class ProdutoController {
 		return new ResponseEntity<>(produtoService.getAllProdutosDTO(),
 				HttpStatus.OK);
 	}
-	
-	/*
-	@GetMapping("/{id}")
-	public ResponseEntity<Produto> getProdutoById(@PathVariable Integer id) {
-		Produto produto = produtoService.getProdutoById(id);
-		if(null != produto)
-			return new ResponseEntity<>(produto,
-					HttpStatus.OK);
-		else
-			return new ResponseEntity<>(produto,
-					HttpStatus.NOT_FOUND);
-	}
-	
-	*/
-	
+
 	@GetMapping("/{id}")
 	public ResponseEntity<Produto> getProdutoById(@PathVariable Integer id) {
 		Produto produto = new Produto();
@@ -72,13 +57,12 @@ public class ProdutoController {
 		return new ResponseEntity<>(produtoService.saveProduto(produto),
 				HttpStatus.CREATED);
 	}
-		
+	
 	@PostMapping("/dto")
 	public ResponseEntity<ProdutoDTO> saveProdutoDTO(@RequestBody ProdutoDTO produtoDTO) {
 		return new ResponseEntity<>(produtoService.saveProdutoDTO(produtoDTO),
 				HttpStatus.CREATED);
 	}
-	
 	
 	@PutMapping("/{id}")
 	public ResponseEntity<Produto> updateProduto(@RequestBody Produto produto, 
@@ -95,17 +79,6 @@ public class ProdutoController {
 	}
 	
 	
-	@DeleteMapping("/{id}")
-	public ResponseEntity<Produto> deleteProduto(@PathVariable Integer id) {
-		Produto produto = produtoService.getProdutoById(id);
-		if(null == produto)
-			return new ResponseEntity<>(produto,
-					HttpStatus.NOT_FOUND);
-		else
-			return new ResponseEntity<>(produtoService.deleteProduto(id),
-					HttpStatus.OK);
-	}
-	
 	@PostMapping(value="/cadastro-produto-com-foto")
 	public ResponseEntity<Produto> saveProdutoFoto(
 			@RequestPart ("produto") String produtoTxt,
@@ -117,6 +90,17 @@ public class ProdutoController {
 			return new ResponseEntity<>(produto,HttpStatus.BAD_REQUEST);
 		else
 			return new ResponseEntity<>(produto,HttpStatus.CREATED);
+	}
+	
+	@DeleteMapping("/{id}")
+	public ResponseEntity<Produto> deleteProduto(@PathVariable Integer id) {
+		Produto produto = produtoService.getProdutoById(id);
+		if(null == produto)
+			return new ResponseEntity<>(produto,
+					HttpStatus.NOT_FOUND);
+		else
+			return new ResponseEntity<>(produtoService.deleteProduto(id),
+					HttpStatus.OK);
 	}
 
 }

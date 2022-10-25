@@ -1,7 +1,8 @@
 package br.com.residencia.ecommerce.entity;
 
 import java.math.BigDecimal;
-import java.time.Instant;
+import java.sql.Date;
+
 import java.util.List;
 
 import javax.persistence.Column;
@@ -19,7 +20,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 
 //@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "idProduto")
 @Entity
-@Table(name = "produto")
+@Table(name="produto")
 public class Produto {
 
 	@Id
@@ -37,7 +38,7 @@ public class Produto {
 	private Integer qtdEstoque;
 	
 	@Column(name = "datacadastro")
-	private Instant dataCadastro;
+	private Date dataCadastro;
 	
 	@Column(name = "valorunitario")
 	private BigDecimal valorUnitario;
@@ -51,7 +52,7 @@ public class Produto {
 
 	@JsonIgnore
 	@OneToMany(mappedBy = "produto")
-	private List<ItemPedido> itemPedido;
+	private List<ItemPedido> itempedido;
 	
 	@Column(name = "imagem_nome")
 	private String imagemNome;
@@ -91,12 +92,12 @@ public class Produto {
 		return idProduto;
 	}
 
-	public List<ItemPedido> getItemPedido() {
-		return itemPedido;
+	public List<ItemPedido> getItempedido() {
+		return itempedido;
 	}
 
-	public void setItemPedido(List<ItemPedido> itemPedido) {
-		this.itemPedido = itemPedido;
+	public void setItempedido(List<ItemPedido> itempedido) {
+		this.itempedido = itempedido;
 	}
 
 	public void setIdProduto(Integer idProduto) {
@@ -127,11 +128,12 @@ public class Produto {
 		this.qtdEstoque = qtdEstoque;
 	}
 
-	public Instant getDataCadastro() {
+	
+	public Date getDataCadastro() {
 		return dataCadastro;
 	}
 
-	public void setDataCadastro(Instant dataCadastro) {
+	public void setDataCadastro(Date dataCadastro) {
 		this.dataCadastro = dataCadastro;
 	}
 

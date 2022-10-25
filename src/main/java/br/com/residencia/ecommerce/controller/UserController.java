@@ -1,11 +1,10 @@
-package br.com.residencia.ecommerce.controller;
+/*package br.com.residencia.ecommerce.controller;
 
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -14,7 +13,6 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-
 import br.com.residencia.ecommerce.entity.User;
 import br.com.residencia.ecommerce.service.UserService;
 //import org.springframework.security.core.context.SecurityContextHolder;
@@ -44,7 +42,7 @@ public class UserController {
 			return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);		
 	}
 	
-	@GetMapping("/info")
+	/*@GetMapping("/info")
     public User getUserDetails(){
         // Recuperando o e-mail a partir do contexto de segurança
         String email = (String) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
@@ -73,4 +71,4 @@ public class UserController {
 		else 
 			return new ResponseEntity<>(false, HttpStatus.OK);
 	}
-}
+}*/

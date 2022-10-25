@@ -13,13 +13,15 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
 import javax.persistence.Table;
-//import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+
 //import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
 //@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "idItemPedido")
 @Entity
 @Table(name="itempedido")
 public class ItemPedido {
+
+	
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -41,6 +43,7 @@ public class ItemPedido {
 	@Column(name = "valorliquido")
 	private BigDecimal valorLiquido;
 	
+	
 	@ManyToOne
 	@JoinColumn(name = "idproduto", referencedColumnName = "idproduto")
 	private Produto produto;
@@ -49,7 +52,30 @@ public class ItemPedido {
 	@JoinColumn(name = "idpedido", referencedColumnName = "idpedido")
 	private Pedido pedido;
 	
+	public ItemPedido() {
+		
+	}
 	
+	@Override
+	public String toString() {
+		return "ItemPedido [idItemPedido=" + idItemPedido + ", quantidade=" + quantidade + ", precoVenda=" + precoVenda
+				+ ", percentualDesconto=" + percentualDesconto + ", valorBruto=" + valorBruto + ", valorLiquido="
+				+ valorLiquido + ", produto=" + produto + ", pedido=" + pedido + "]";
+	}
+	
+	public ItemPedido(Integer idItemPedido, Integer quantidade, BigDecimal precoVenda, Integer percentualDesconto,
+			BigDecimal valorBruto, BigDecimal valorLiquido, Produto produto, Pedido pedido) {
+		super();
+		this.idItemPedido = idItemPedido;
+		this.quantidade = quantidade;
+		this.precoVenda = precoVenda;
+		this.percentualDesconto = percentualDesconto;
+		this.valorBruto = valorBruto;
+		this.valorLiquido = valorLiquido;
+		this.produto = produto;
+		this.pedido = pedido;
+	}
+
 	public void setProduto(Produto produto) {
 		this.produto = produto;
 	}

@@ -33,6 +33,7 @@ public class Endereco {
 	@Column(name = "cidade")
 	private String cidade;
 	
+
 	@Column(name = "complemento")
 	private String complemento;
 	

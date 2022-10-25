@@ -8,40 +8,42 @@ import org.springframework.stereotype.Service;
 import br.com.residencia.ecommerce.entity.Cliente;
 import br.com.residencia.ecommerce.repository.ClienteRepository;
 
+
+
 @Service
 public class ClienteService {
 	@Autowired
 	ClienteRepository clienteRepository;
 
-	public List<Cliente> getAllClientes() {
-		return clienteRepository.findAll();
+	public List<Cliente> getAllClientes(){
+		return clienteRepository.findAll();	
 	}
-
+	
 	public Cliente getClienteById(Integer id) {
-		//return clienteRepository.findById(id).orElse(null);
-		return clienteRepository.findById(id).get();
+		return clienteRepository.findById(id).orElse(null);
+		
 	}
-
+	
 	public Cliente saveCliente(Cliente cliente) {
 		return clienteRepository.save(cliente);
 	}
-
-	public Cliente updateCliente(Cliente cliente, Integer id) {
+	
+	public Cliente updateCliente(Cliente cliente,Integer id) {
 		Cliente clienteExistenteNoBanco = getClienteById(id);
-
-		if (clienteExistenteNoBanco != null) {
-			//clienteExistenteNoBanco.setIdCliente(clienteExistenteNoBanco.getIdCliente());
-			clienteExistenteNoBanco.setEmail(cliente.getEmail());
-			clienteExistenteNoBanco.setNomeCompleto(cliente.getNomeCompleto());
-			clienteExistenteNoBanco.setCpf(cliente.getCpf());
-			clienteExistenteNoBanco.setTelefone(cliente.getTelefone());
-			clienteExistenteNoBanco.setDataNascimento(cliente.getDataNascimento());
-			clienteExistenteNoBanco.setEndereco(cliente.getEndereco());
+		
+		if(clienteExistenteNoBanco!= null) {
+		clienteExistenteNoBanco.setIdCliente(clienteExistenteNoBanco.getIdCliente());
+		clienteExistenteNoBanco.setEmail(cliente.getEmail());
+		clienteExistenteNoBanco.setNomeCompleto(cliente.getNomeCompleto());
+		clienteExistenteNoBanco.setCpf(cliente.getCpf());
+		clienteExistenteNoBanco.setTelefone(cliente.getTelefone());
+		clienteExistenteNoBanco.setDataNascimento(cliente.getDataNascimento());
+		clienteExistenteNoBanco.setEndereco(cliente.getEndereco());
 		}
 		return clienteRepository.save(clienteExistenteNoBanco);
-
+		
 	}
-
+	
 	public Cliente deleteCliente(Integer id) {
 		clienteRepository.deleteById(id);
 		return getClienteById(id);
