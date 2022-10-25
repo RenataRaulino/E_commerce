@@ -3,7 +3,10 @@ package br.com.residencia.ecommerce.dto;
 import java.math.BigDecimal;
 import java.util.List;
 
+
+
 public class ItemPedidoDTO {
+
 	private Integer idItemPedido;
 	private Integer quantidade;
 	private BigDecimal precoVenda;
@@ -16,6 +19,9 @@ public class ItemPedidoDTO {
 	private List<ProdutoDTO> listaProdutosDTO;
 	private List<PedidoDTO> listaPedidoDTO;
 	
+	
+	public ItemPedidoDTO() {	
+	}
 	
 	public Integer getIdItemPedido() {
 		return idItemPedido;
@@ -79,7 +85,6 @@ public class ItemPedidoDTO {
 	public void setPedidosDTO(PedidoDTO pedidosDTO) {
 		PedidosDTO = pedidosDTO;
 	}
-	
 	*/
 	
 }

@@ -29,7 +29,7 @@ public class ClienteController {
 		return new ResponseEntity<>(clienteService.getAllClientes(),
 				HttpStatus.OK);
 	}
-	
+
 	@GetMapping("/{id}")
 	public ResponseEntity<Cliente> getClienteById(@PathVariable Integer id) {
 		Cliente cliente = new Cliente();
@@ -41,8 +41,9 @@ public class ClienteController {
 			throw new NoSuchElementFoundException("Não foi encontrado resultado com o id " + id);
 		}
 	}
-
-	/*@GetMapping("/{id}")
+	
+	/*
+	@GetMapping("/{id}")
 	public ResponseEntity<Cliente> getClienteById(@PathVariable Integer id) {
 		Cliente cliente = clienteService.getClienteById(id);
 		if(null != cliente)
@@ -51,7 +52,8 @@ public class ClienteController {
 		else
 			return new ResponseEntity<>(cliente,
 					HttpStatus.NOT_FOUND);
-	}*/
+	}
+	*/
 	
 	@PostMapping
 	public ResponseEntity<Cliente> saveCliente(@RequestBody Cliente cliente) {

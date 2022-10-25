@@ -49,6 +49,19 @@ public class PedidoController {
 		}
 	}
 	
+	/*
+	@GetMapping("/{id}")
+	public ResponseEntity<Pedido> getPedidoById(@PathVariable Integer id) {
+		Pedido pedido = pedidoService.getPedidoById(id);
+		if(null != pedido)
+			return new ResponseEntity<>(pedido,
+					HttpStatus.OK);
+		else
+			return new ResponseEntity<>(pedido,
+					HttpStatus.NOT_FOUND);
+	}
+	*/
+	
 	@PostMapping
 	public ResponseEntity<Pedido> savePedido(@RequestBody Pedido pedido) {
 		return new ResponseEntity<>(pedidoService.savePedido(pedido),
@@ -60,7 +73,6 @@ public class PedidoController {
 		return new ResponseEntity<>(pedidoService.savePedidoDTO(pedidoDTO),
 				HttpStatus.CREATED);
 	}
-	
 	
 	@PutMapping("/{id}")
 	public ResponseEntity<Pedido> updatePedido(@RequestBody Pedido pedido, 

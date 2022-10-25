@@ -18,7 +18,8 @@ public class CategoriaService {
 	}
 	
 	public Categoria getCategoriaById(Integer id) {
-		return categoriaRepository.findById(id).orElse(null);
+		//return categoriaRepository.findById(id).orElse(null);
+		return categoriaRepository.findById(id).get();
 		
 	}
 	
@@ -30,7 +31,7 @@ public class CategoriaService {
 		Categoria categoriaExistenteNoBanco = getCategoriaById(id);
 		
 		if(categoriaExistenteNoBanco!= null) {
-		categoriaExistenteNoBanco.setIdCategoria(categoriaExistenteNoBanco.getIdCategoria());
+		//categoriaExistenteNoBanco.setIdCategoria(categoriaExistenteNoBanco.getIdCategoria());
 		categoriaExistenteNoBanco.setNome(categoria.getNome());
 		categoriaExistenteNoBanco.setDescricao(categoria.getDescricao());
 		}

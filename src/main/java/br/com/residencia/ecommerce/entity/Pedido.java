@@ -23,7 +23,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 //@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "idPedido")
 
 @Entity
-@Table(name="pedido")
+@Table(name = "pedido")
 public class Pedido {
 
 	@Id
@@ -52,15 +52,15 @@ public class Pedido {
 
 	@JsonIgnore
 	@OneToMany(mappedBy = "pedido")
-	private List<ItemPedido> itempedido;
+	private List<ItemPedido> itemPedido;
 	
 
-	public List<ItemPedido> getItempedido() {
-		return itempedido;
+	public List<ItemPedido> getItemPedido() {
+		return itemPedido;
 	}
 
-	public void setItempedido(List<ItemPedido> itempedido) {
-		this.itempedido = itempedido;
+	public void setItempedido(List<ItemPedido> itemPedido) {
+		this.itemPedido = itemPedido;
 	}
 
 	public Integer getIdPedido() {

@@ -1,6 +1,7 @@
 package br.com.residencia.ecommerce.dto;
 
 public class ConsultaCepDTO {
+
 	private String cep;
 	private String logradouro;
 	private String complemento;

@@ -10,14 +10,12 @@ import br.com.residencia.ecommerce.dto.PedidoDTO;
 import br.com.residencia.ecommerce.entity.Pedido;
 import br.com.residencia.ecommerce.repository.PedidoRepository;
 
-
-
 @Service
 public class PedidoService {
 	@Autowired
 	PedidoRepository pedidoRepository;
-	
-	public List<Pedido> getAllPedidos(){
+
+	public List<Pedido> getAllPedidos() {
 		return pedidoRepository.findAll();
 	}
 	
@@ -34,14 +32,16 @@ public class PedidoService {
 
 		return listaPedidoDTO;
 	}
-	
+
 	public Pedido getPedidoById(Integer id) {
-		return pedidoRepository.findById(id).orElse(null);
+		//return pedidoRepository.findById(id).orElse(null);
+		return pedidoRepository.findById(id).get();
 	}
-	
+
 	public Pedido savePedido(Pedido pedido) {
 		return pedidoRepository.save(pedido);
 	}
+	
 	public PedidoDTO savePedidoDTO(PedidoDTO pedidoDTO) {
 		Pedido pedido = toEntidade(pedidoDTO);
 		Pedido novaPedido = pedidoRepository.save(pedido);
@@ -50,23 +50,23 @@ public class PedidoService {
 		return pedidoAtualizadaDTO;
 	}
 
-	
 	public Pedido updatePedido(Pedido pedido, Integer id) {
 		Pedido pedidoExistenteNoBanco = getPedidoById(id);
 
-		
-		if(pedidoExistenteNoBanco!= null) {
-		pedidoExistenteNoBanco.setIdPedido(pedidoExistenteNoBanco.getIdPedido());
-		pedidoExistenteNoBanco.setDataPedido(pedido.getDataPedido());
-		pedidoExistenteNoBanco.setDataEntrega(pedido.getDataEntrega());
-		pedidoExistenteNoBanco.setDataEnvio(pedido.getDataEnvio());
-		pedidoExistenteNoBanco.setStatus(pedido.getStatus());
-		pedidoExistenteNoBanco.setValorTotal(pedido.getValorTotal());
-		pedidoExistenteNoBanco.setCliente(pedido.getCliente());
+		if (pedidoExistenteNoBanco != null) {
+			pedidoExistenteNoBanco.setDataPedido(pedido.getDataPedido());
+			pedidoExistenteNoBanco.setDataEntrega(pedido.getDataEntrega());
+			pedidoExistenteNoBanco.setDataEnvio(pedido.getDataEnvio());
+			pedidoExistenteNoBanco.setStatus(pedido.getStatus());
+			pedidoExistenteNoBanco.setValorTotal(pedido.getValorTotal());
+			//pedidoExistenteNoBanco.setIdPedido(pedidoExistenteNoBanco.getIdPedido());
+			//pedidoExistenteNoBanco.setCliente(pedido.getCliente());
+			//pedidoExistenteNoBanco.setItempedido(pedidoExistenteNoBanco.getItempedido());
 		}
-		return pedidoRepository.save(pedidoExistenteNoBanco);	
-		
+		return pedidoRepository.save(pedidoExistenteNoBanco);
+
 	}
+	
 	public PedidoDTO updatePedidoDTO(PedidoDTO pedidoDTO, Integer id) {
 		Pedido pedidoExistenteNoBanco = getPedidoById(id);
 		PedidoDTO pedidoAtualizadoDTO = new PedidoDTO();
@@ -82,11 +82,12 @@ public class PedidoService {
 		}
 		return pedidoAtualizadoDTO;
 	}
-	
+
 	public Pedido deletePedido(Integer id) {
 		pedidoRepository.deleteById(id);
 		return getPedidoById(id);
 	}
+
 	public Pedido toEntidade(PedidoDTO pedidoDTO) {
 		Pedido pedido = new Pedido();
 		
@@ -106,5 +107,4 @@ public class PedidoService {
 
 		return pedidoDTO;
 	}
-	
 }
