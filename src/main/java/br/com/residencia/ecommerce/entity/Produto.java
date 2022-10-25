@@ -1,7 +1,8 @@
 package br.com.residencia.ecommerce.entity;
 
 import java.math.BigDecimal;
-import java.time.Instant;
+import java.sql.Date;
+
 import java.util.List;
 
 import javax.persistence.Column;
@@ -37,7 +38,7 @@ public class Produto {
 	private Integer qtdEstoque;
 	
 	@Column(name = "datacadastro")
-	private Instant dataCadastro;
+	private Date dataCadastro;
 	
 	@Column(name = "valorunitario")
 	private BigDecimal valorUnitario;
@@ -53,9 +54,40 @@ public class Produto {
 	@OneToMany(mappedBy = "produto")
 	private List<ItemPedido> itempedido;
 	
+	@Column(name = "imagem_nome")
+	private String imagemNome;
 	
+	@Column(name = "imagem_filename")
+	private String imagemFileName;
+	
+	@Column(name = "imagem_url")
+	private String imagemUrl;
 
 	
+	public String getImagemNome() {
+		return imagemNome;
+	}
+
+	public void setImagemNome(String imagemNome) {
+		this.imagemNome = imagemNome;
+	}
+
+	public String getImagemFileName() {
+		return imagemFileName;
+	}
+
+	public void setImagemFileName(String imagemFileName) {
+		this.imagemFileName = imagemFileName;
+	}
+
+	public String getImagemUrl() {
+		return imagemUrl;
+	}
+
+	public void setImagemUrl(String imagemUrl) {
+		this.imagemUrl = imagemUrl;
+	}
+
 	public Integer getIdProduto() {
 		return idProduto;
 	}
@@ -96,11 +128,12 @@ public class Produto {
 		this.qtdEstoque = qtdEstoque;
 	}
 
-	public Instant getDataCadastro() {
+	
+	public Date getDataCadastro() {
 		return dataCadastro;
 	}
 
-	public void setDataCadastro(Instant dataCadastro) {
+	public void setDataCadastro(Date dataCadastro) {
 		this.dataCadastro = dataCadastro;
 	}
 

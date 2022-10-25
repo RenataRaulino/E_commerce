@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import br.com.residencia.ecommerce.entity.Cliente;
+import br.com.residencia.ecommerce.exception.NoSuchElementFoundException;
 import br.com.residencia.ecommerce.service.ClienteService;
 
 @RestController
@@ -29,9 +30,19 @@ public class ClienteController {
 				HttpStatus.OK);
 	}
 	
-
-
 	@GetMapping("/{id}")
+	public ResponseEntity<Cliente> getClienteById(@PathVariable Integer id) {
+		Cliente cliente = new Cliente();
+		
+		try {
+			cliente = clienteService.getClienteById(id);
+			return new ResponseEntity<>(cliente, HttpStatus.OK);			
+		}catch(Exception ex) {
+			throw new NoSuchElementFoundException("Não foi encontrado resultado com o id " + id);
+		}
+	}
+
+	/*@GetMapping("/{id}")
 	public ResponseEntity<Cliente> getClienteById(@PathVariable Integer id) {
 		Cliente cliente = clienteService.getClienteById(id);
 		if(null != cliente)
@@ -40,7 +51,7 @@ public class ClienteController {
 		else
 			return new ResponseEntity<>(cliente,
 					HttpStatus.NOT_FOUND);
-	}
+	}*/
 	
 	@PostMapping
 	public ResponseEntity<Cliente> saveCliente(@RequestBody Cliente cliente) {

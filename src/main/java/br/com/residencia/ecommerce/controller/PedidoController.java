@@ -14,7 +14,9 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import br.com.residencia.ecommerce.dto.PedidoDTO;
 import br.com.residencia.ecommerce.entity.Pedido;
+import br.com.residencia.ecommerce.exception.NoSuchElementFoundException;
 import br.com.residencia.ecommerce.service.PedidoService;
 
 @RestController
@@ -29,17 +31,22 @@ public class PedidoController {
 				HttpStatus.OK);
 	}
 	
-
+	@GetMapping("/dto")
+	public ResponseEntity<List<PedidoDTO>> getAllProdutosDTO(){
+		return new ResponseEntity<>(pedidoService.getAllPedidosDTO(),
+				HttpStatus.OK);
+	}
 
 	@GetMapping("/{id}")
 	public ResponseEntity<Pedido> getPedidoById(@PathVariable Integer id) {
-		Pedido pedido = pedidoService.getPedidoById(id);
-		if(null != pedido)
-			return new ResponseEntity<>(pedido,
-					HttpStatus.OK);
-		else
-			return new ResponseEntity<>(pedido,
-					HttpStatus.NOT_FOUND);
+		Pedido pedido = new Pedido();
+		
+		try {
+			pedido = pedidoService.getPedidoById(id);
+			return new ResponseEntity<>(pedido, HttpStatus.OK);			
+		}catch(Exception ex) {
+			throw new NoSuchElementFoundException("Não foi encontrado resultado com o id " + id);
+		}
 	}
 	
 	@PostMapping
@@ -48,6 +55,13 @@ public class PedidoController {
 				HttpStatus.CREATED);
 	}
 	
+	@PostMapping("/dto")
+	public ResponseEntity<PedidoDTO> savePedidoDTO(@RequestBody PedidoDTO pedidoDTO) {
+		return new ResponseEntity<>(pedidoService.savePedidoDTO(pedidoDTO),
+				HttpStatus.CREATED);
+	}
+	
+	
 	@PutMapping("/{id}")
 	public ResponseEntity<Pedido> updatePedido(@RequestBody Pedido pedido, 
 			@PathVariable Integer id){
@@ -55,7 +69,12 @@ public class PedidoController {
 				HttpStatus.OK);
 	}
 	
-	
+	@PutMapping("/dto/{id}")
+	public ResponseEntity<PedidoDTO> updatePedidoDTO(@RequestBody PedidoDTO pedidoDTO, 
+			@PathVariable Integer id){
+		return new ResponseEntity<>(pedidoService.updatePedidoDTO(pedidoDTO, id),
+				HttpStatus.OK);
+	}
 	
 	
 	@DeleteMapping("/{id}")

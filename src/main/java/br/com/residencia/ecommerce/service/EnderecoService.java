@@ -1,12 +1,16 @@
 package br.com.residencia.ecommerce.service;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.client.RestTemplate;
 
+import br.com.residencia.ecommerce.dto.ConsultaCepDTO;
 import br.com.residencia.ecommerce.entity.Endereco;
-import br.com.residencia.ecommerce.entity.Pedido;
+
 import br.com.residencia.ecommerce.repository.EnderecoRepository;
 
 
@@ -48,5 +52,32 @@ public class EnderecoService {
 	public Endereco deleteEndereco(Integer id) {
 		enderecoRepository.deleteById(id);
 		return getEnderecoById(id);
+	}
+	
+	public ConsultaCepDTO consultaCepApiExterna(String cep) {
+		RestTemplate restTemplate = new RestTemplate();
+		String uri = "https://viacep.com.br/ws/{cep}/json/";
+		
+		Map<String,String> params = new HashMap<String, String>();
+		params.put("cep", cep);
+		
+		ConsultaCepDTO consultaCepDTO = restTemplate.getForObject(uri, ConsultaCepDTO.class, params);
+		
+		return consultaCepDTO;
+	}
+	
+	public Endereco saveEnderecoFromApi(String cep) {
+		ConsultaCepDTO consultaCepDTO = consultaCepApiExterna(cep);
+		
+		Endereco endereco = new Endereco();
+		endereco.setCep(consultaCepDTO.getCep());
+		endereco.setBairro(consultaCepDTO.getBairro());
+		endereco.setCidade(consultaCepDTO.getLocalidade());
+		endereco.setComplemento(consultaCepDTO.getComplemento());
+		endereco.setNumero(null);
+		endereco.setRua(consultaCepDTO.getLogradouro());
+		endereco.setUf(consultaCepDTO.getUf());
+		
+		return enderecoRepository.save(endereco);
 	}
 }

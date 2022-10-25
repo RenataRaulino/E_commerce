@@ -14,7 +14,9 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import br.com.residencia.ecommerce.dto.ConsultaCepDTO;
 import br.com.residencia.ecommerce.entity.Endereco;
+import br.com.residencia.ecommerce.exception.NoSuchElementFoundException;
 import br.com.residencia.ecommerce.service.EnderecoService;
 
 @RestController
@@ -33,14 +35,29 @@ public class EnderecoController {
 
 	@GetMapping("/{id}")
 	public ResponseEntity<Endereco> getEnderecoById(@PathVariable Integer id) {
-		Endereco endereco = enderecoService.getEnderecoById(id);
-		if(null != endereco)
-			return new ResponseEntity<>(endereco,
-					HttpStatus.OK);
-		else
-			return new ResponseEntity<>(endereco,
-					HttpStatus.NOT_FOUND);
+		Endereco endereco = new Endereco();
+
+		try {
+			endereco = enderecoService.getEnderecoById(id);
+			return new ResponseEntity<>(endereco, HttpStatus.OK);
+		} catch (Exception ex) {
+			throw new NoSuchElementFoundException("Não foi encontrado resultado com o id " + id);
+		}
 	}
+
+		@GetMapping("/consulta-cep/{cep}")
+		public ResponseEntity<ConsultaCepDTO> consultaCepApiExterna(@PathVariable String cep) {
+			ConsultaCepDTO consultaCepDTO = enderecoService.consultaCepApiExterna(cep);
+			if (null != consultaCepDTO)
+				return new ResponseEntity<>(consultaCepDTO, HttpStatus.OK);
+			else
+				return new ResponseEntity<>(consultaCepDTO, HttpStatus.NOT_FOUND);
+		}
+
+		@GetMapping("/cep/{cep}")
+		public ResponseEntity<Endereco> saveEnderecoFromApi(@PathVariable String cep) {
+			return new ResponseEntity<>(enderecoService.saveEnderecoFromApi(cep), HttpStatus.CREATED);
+		}
 	
 	@PostMapping
 	public ResponseEntity<Endereco> saveEndereco(@RequestBody Endereco endereco) {

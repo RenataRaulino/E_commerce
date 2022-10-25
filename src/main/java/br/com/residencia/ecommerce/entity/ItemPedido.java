@@ -21,6 +21,8 @@ import javax.persistence.Table;
 @Table(name="itempedido")
 public class ItemPedido {
 
+	
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "iditempedido")
@@ -50,7 +52,30 @@ public class ItemPedido {
 	@JoinColumn(name = "idpedido", referencedColumnName = "idpedido")
 	private Pedido pedido;
 	
+	public ItemPedido() {
+		
+	}
 	
+	@Override
+	public String toString() {
+		return "ItemPedido [idItemPedido=" + idItemPedido + ", quantidade=" + quantidade + ", precoVenda=" + precoVenda
+				+ ", percentualDesconto=" + percentualDesconto + ", valorBruto=" + valorBruto + ", valorLiquido="
+				+ valorLiquido + ", produto=" + produto + ", pedido=" + pedido + "]";
+	}
+	
+	public ItemPedido(Integer idItemPedido, Integer quantidade, BigDecimal precoVenda, Integer percentualDesconto,
+			BigDecimal valorBruto, BigDecimal valorLiquido, Produto produto, Pedido pedido) {
+		super();
+		this.idItemPedido = idItemPedido;
+		this.quantidade = quantidade;
+		this.precoVenda = precoVenda;
+		this.percentualDesconto = percentualDesconto;
+		this.valorBruto = valorBruto;
+		this.valorLiquido = valorLiquido;
+		this.produto = produto;
+		this.pedido = pedido;
+	}
+
 	public void setProduto(Produto produto) {
 		this.produto = produto;
 	}
